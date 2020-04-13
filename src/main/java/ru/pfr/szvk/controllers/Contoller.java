@@ -7,14 +7,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class Contoller {
     @GetMapping("/")
-    public String greeting( Model model) {
+    public String home( Model model) {
         model.addAttribute("title", "ОПФР по г. Севастополю  СЗВ-К");
         return "home";
     }
 
+    @GetMapping("/index")
+    public String index( Model model) {
+        model.addAttribute("title", "ОПФР по г. Севастополю  СЗВ-К");
+        return "index";
+    }
+
     @GetMapping("/about")
     public String about( Model model) {
-        model.addAttribute("title", "ОПФР по г. Севастополю  СЗВ-К");
+        model.addAttribute("title", "О ПРОЕКТЕ СЗВ-К");
         return "about";
     }
 
