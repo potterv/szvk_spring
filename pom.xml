@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>ru.pfr.szvk</groupId>
-  <artifactId>szvk_web</artifactId>
+  <artifactId>szvk_spring</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -50,6 +50,18 @@
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.ibm.db2.jcc</groupId>
+      <artifactId>db2-spring-boot-starter</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -64,7 +76,7 @@
   </dependencies>
 
   <build>
-    <finalName>szvk_web</finalName>
+    <finalName>szvk_spring</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
