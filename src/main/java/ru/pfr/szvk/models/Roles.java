@@ -4,10 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 @Entity
 public class Roles {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nameRole;
@@ -36,5 +37,14 @@ public class Roles {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Roles(String nameRole, String description){
+        this.nameRole = nameRole;
+        this.description = description;
+
+    }
+
+    public Roles() {
     }
 }
