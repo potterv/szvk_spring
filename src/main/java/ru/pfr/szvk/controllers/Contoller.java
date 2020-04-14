@@ -12,12 +12,6 @@ public class Contoller {
         return "home";
     }
 
-    @GetMapping("/index")
-    public String index( Model model) {
-        model.addAttribute("title", "ОПФР по г. Севастополю  СЗВ-К");
-        return "index";
-    }
-
     @GetMapping("/about")
     public String about( Model model) {
         model.addAttribute("title", "О ПРОЕКТЕ СЗВ-К");
