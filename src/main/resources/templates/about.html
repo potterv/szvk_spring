@@ -14,13 +14,13 @@ Released   : 20131117
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>Портал SZVK предназначен для обработки СЗВ-К xml файлов.</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
     <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/bootstrap.main.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <!--	<link rel="stylesheet" th:href="@{/css/fonts.css}">-->
     <!--	<link rel="stylesheet" th:href="@{/css/default.css}">-->
     <!--[if IE 6]>
@@ -30,9 +30,16 @@ Released   : 20131117
 <body>
 <header th:insert="blocks/head::header"></header>
 
-<div class = "container mt-10">
+<div class = "container mt-3">
 
-    <h1> О ПРОЕКТЕ </h1>
+    <h4>Портал SZVK предназначен для обработки СЗВ-К xml файлов.</h4><br>
+    <p align-middle> Сотрудники Пенсионного фонда загружают xml файлы на портал SZVK. На следующем шаге выполняется автоматический поиск
+    места жительства по соответствующему СНИЛС, а затем информация выгружается в формате xls файла. Xls файл передается
+    в органы ФМС на обработку. Полученный файл xls от органов ФМС с пометкой о фактическом проживании человека в г. Севастополе
+    на 18.03.2014 сотрудник Пенсионного фонда загружает на портал SZVK.
+    <p align-baseline>Сотрудники Пенсионного фонда, ответственные за анализ данных о фактическом проживании человека в г. Севастополе на 18.03.2014,
+     имеют доcтуп на поиск и просмотр информации о фактическом проживании человека в г. Севастополе на 18.03.2014</p>
+
 
 
 </div>
