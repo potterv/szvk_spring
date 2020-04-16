@@ -71,7 +71,7 @@ public class Model {
     public void readDataFromXmlToDb(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
         PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
 
-        String pathD = "D:\\IdeaProject\\szvk\\mail\\inSZVK";
+        String pathD = "D:\\IdeaProject\\szvk_spring\\mail\\inSZVK";
         log.info(String.join(" ", "Определен mail каталог", pathD));
         ReadDerectory rf= ReadDerectory.getInstance();
         log.info(String.join(" ", "файлы для обработки определены"));
@@ -96,7 +96,7 @@ public class Model {
             log.info(String.join(" ", "В таблицу employees_from_policyholder добавлены записи из xml файлов"));
 
         }
-
+        this.addDataFromPoliciholder(dbHandler,employees);
         System.out.println(employees.size());
         for (Employee e: employees
              ) {
@@ -188,7 +188,7 @@ public class Model {
 //            param.put("numberInsured",employee.getRegnumber().toString());
 //            param.put("nameInsured",employee.getPolicyholderShort());
 //            System.out.println(param.values().toString());
-            dbHandler.addData("EMPLOYEES_FROM_POLICYHOLDER_test","snils",param);
+            dbHandler.addData("EMPLOYEES_FROM_POLICYHOLDER","snils",param);
             param.clear();
         }
     }

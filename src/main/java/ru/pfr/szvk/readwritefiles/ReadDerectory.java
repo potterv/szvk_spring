@@ -60,6 +60,7 @@ public class ReadDerectory {
     }
 
     public static final String PATHRESPONCE = "".join("",new File("").getAbsolutePath(),"/mail/responce/");
+
     public static final String PATHINSZVK = "".join("",new File("").getAbsolutePath(),"mail/inSZVK/");
     private static final String PATHOUT = "".join("",new File("").getAbsolutePath(),"mail/out/");
     private static final String PATHREQUEST = "".join("",new File("").getAbsolutePath(),"mail/request");

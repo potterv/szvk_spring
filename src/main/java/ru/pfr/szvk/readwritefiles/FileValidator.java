@@ -3,7 +3,7 @@ package ru.pfr.szvk.readwritefiles;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.stereotype.Component;
-import ru.pfr.UploadedFile;
+
 
 @Component
 public class FileValidator implements Validator {
