@@ -17,7 +17,7 @@
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http
 //                .authorizeRequests()
-//                .antMatchers("/", "/in").permitAll()
+//                .antMatchers("/", "/").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
 //                .formLogin()

@@ -38,7 +38,7 @@ Released   : 20131117
 							<table>
 								<tr>
 									<td>Укажите путь к файлу для загрузки</td>
-									<td><input type="file" name="file" /></td>
+									<td><input type="file" name="file"  multiple/></td>
 									<td style="color: red; font-style: italic;">
 
 									</td>
@@ -59,6 +59,19 @@ Released   : 20131117
 
 	</div>
 	<br/>
+
+<div class="container mt-5">
+	<div class="uploadFile">
+		<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+			<div class="form-group">
+				<label class="control-label" for="files">Укажите файлы для загрузки:</label>
+				<input type="file" class="form-control" id="files"
+					   placeholder="Укажите файлы для загрузки"  name="files" multiple></input>
+			</div>
+			<button type="submit" class="btn btn-default" id="btnSubmit">Загрузить файл СЗВ-К</button>
+		</form>
+	</div>
+</div>
 
 	<footer th:insert="blocks/footer::footer"></footer>
 

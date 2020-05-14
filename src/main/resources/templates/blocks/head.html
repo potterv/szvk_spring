@@ -5,12 +5,12 @@
             <div id="menu" class="container">
                 <ul>
                     <li class="current_page_item"><a th:href="@{/}" accesskey="1" title="">Главная</a></li>
-                    <li><a th:href="@{/}" accesskey="1" title="">Войти</a></li>
-<!--                    <li><a th:href="@{/out}" accesskey="1" title="" class = "disabled" aria-disabled="true">Выход</a></li>-->
+                    <li><a th:href="@{/login}" accesskey="1" title="">Войти</a></li>
+                    <li><a th:href="@{/logout}" accesskey="1" title="" class = "disabled" aria-disabled="true">Выход</a></li>
                     <li><a th:href="@{/about}" accesskey="1" title="">О проекте </a></li>
 <!--                    <li><a th:href="@{/getdate}" accesskey="1" title="">Обработать загруженные файлы</a></li>-->
 <!--                    <li><a th:href="@{/viewdata}" accesskey="1" title="">Вывести результат</a></li>-->
-<!--                    <li><a th:href="@{/roles}" accesskey="1" title="" class = "disabled" aria-disabled="true">Добавить роль</a></li>-->
+                    <li><a th:href="@{/roles}" accesskey="1" title="" class = "disabled" aria-disabled="true">Добавить роль</a></li>
 <!--                    <li><a th:href="@{/adduser}" accesskey="1" title="" class="disabled" aria-disabled="true">Добавить пользователя</a></li>-->
 
                 </ul>
@@ -21,7 +21,7 @@
                 <div class="title">
                     <h2>Подтверждение информации в ФМС</h2>
                 </div>
-                <p>Специалист загружает Файлы <strong>СЗВ-К</strong> в каталог на сервер, для обработки <a th:href="@{/#}" onclick="alert('На данный момент функионал не доступен')"  rel="nofollow">Загрузить файлы на сервер</a>. После загрузки файлов выполняется обработка содержимого файлов <a th:href="@{/#}" onclick="alert('На данный момент функионал не доступен')"> Выполнить обработку</a>. После чего выводится информация на экран. </p>
+                <p>Специалист загружает Файлы <strong>СЗВ-К</strong> в каталог на сервер, для обработки <a th:href="@{/uploadform}"   rel="nofollow">Загрузить файлы на сервер</a>. После загрузки файлов выполняется обработка содержимого файлов <a th:href="@{/#}" onclick="alert('На данный момент функионал не доступен')"> Выполнить обработку</a>. После чего выводится информация на экран. </p>
             </div>
             <div class="column2">
                 <div class="title">
@@ -29,7 +29,7 @@
                 </div>
                 <br>
                 <img src="images/pic01.jpg" width="268" height="130" alt="" />
-                <p><a th:href="@{/#}" onclick="alert('На данный момент функионал не доступен')"  rel="nofollow">Выполнить выгрузку csv - файла  для ФМС<a/></p>
+                <p><a th:href="@{/files}"   rel="nofollow">Выполнить выгрузку csv - файла  для ФМС<a/></p>
 
             </div>
             <div class="column3">

@@ -384,7 +384,7 @@ public class DbHandler {
             } else {
 
                 if(keyControl.equals("snils")){
-                    log.warn("".join(" ", "Запись с "," UUID_R = ", resultSet.getString("UUID_R")," СНИЛС - ",nameColls.get(keyControl).toString(),"  не будет добавлена в таблицу", nameTable));
+                    log.warn("".join(" ", "Запись с "," UUID_R = ", resultSet.getString("UUID_R")," СНИЛС - ",nameColls.get(keyControl).toString()," существует в базе и  не будет добавлена в таблицу", nameTable));
                 }else{
                     log.warn("".join(" ", "Запись с "," UUID_R = ", resultSet.getString("UUID_R"),"  не будет добавлена в таблицу", nameTable));
                 }

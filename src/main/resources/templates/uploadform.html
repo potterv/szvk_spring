@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Coefficient
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20131117
+
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Портал SZVK предназначен для обработки СЗВ-К xml файлов.</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <!--	<link rel="stylesheet" th:href="@{/css/fonts.css}">-->
+    <!--	<link rel="stylesheet" th:href="@{/css/default.css}">-->
+    <!--[if IE 6]>
+    <link href="/css/default_ie6.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+</head>
+
+<body>
+<header th:insert="blocks/head::header"></header>
+<div class="container h-20">
+    <div class="h-15">
+        <div class="row h-10 justify-content-center align-items-center">
+            <div class="col-sm-10">
+                <h5>Пакетная загрузка xml файлов</h5>
+                <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+                    <div class="form-group">
+                        <label class="control-label" for="files">Укажите файлы для загрузки:</label>
+                        <input type="file" class="form-control" id="files"
+                               placeholder="Upload Multiple Files"  name="files" multiple></input>
+                    </div>
+                    <button type="submit" class="btn btn-default" id="btnSubmit">Загрузить</button>
+                    <a href="/files" class="btn btn-default" role="button">Files</a>
+                </form>
+                <div th:if="${message}">
+                    <strong><span th:text="${message}"/></strong>
+                    <hr>
+                </div>
+                <ul th:each="filename: ${files}">
+                    <li><span th:text="${filename}"/></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer::footer"></footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

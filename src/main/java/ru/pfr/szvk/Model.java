@@ -11,6 +11,7 @@ import ru.pfr.szvk.readwritefiles.fromfms.RowFromFms;
 import ru.pfr.szvk.readwritefiles.xlsmodel.StreamExcel;
 
 import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -69,9 +70,9 @@ public class Model {
 
 
     public void readDataFromXmlToDb(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),"\\src\\main\\resources\\log4j.properties"));
 
-        String pathD = "D:\\IdeaProject\\szvk_spring\\mail\\inSZVK";
+        String pathD = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
         log.info(String.join(" ", "Определен mail каталог", pathD));
         ReadDerectory rf= ReadDerectory.getInstance();
         log.info(String.join(" ", "файлы для обработки определены"));
@@ -125,7 +126,7 @@ public class Model {
 //        param.put("numberInsured","");
 //        param.put("nameInsured","");
         List<Employee> employees = new LinkedList<Employee>();
-        employees = dbHandler.getEmployees("view_employee_with_adress","UUID_P",param);
+        employees = dbHandler.getEmployees("VIEW_UNICAL_SNILS","UUID_P",param);
 //        Collections.sort(employees);
         return employees;
     }
