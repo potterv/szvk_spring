@@ -34,9 +34,15 @@ public class ReadDerectory {
 
                 for (File item : dir.listFiles()) {
                     if (item.isFile()) {
+                        if (item.getName().subSequence(item.getName().length()-3,item.getName().length()).toString().equals("xml")
+                                || item.getName().subSequence(item.getName().length()-3,item.getName().length()).toString().equals("XML")){
+                            log.info(String.join(" ","Будет проанализирован файл",item.getAbsolutePath()));
+                            listF.add(new StringBuffer(item.toString()));
+                        }else {
+                           log.info(String.join(" ","Файл ",item.getAbsolutePath()," загружен не правомерно и будет удален"));
+                           item.delete();
+                        }
 
-                        log.info(String.join(" ","Будет проанализирован файл",item.getAbsolutePath()));
-                        listF.add(new StringBuffer(item.toString()));
                     }
                 }
             }

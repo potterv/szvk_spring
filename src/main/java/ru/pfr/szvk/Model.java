@@ -4,9 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 
-import ru.pfr.szvk.readwritefiles.CsvWriter;
-import ru.pfr.szvk.readwritefiles.ReadDerectory;
-import ru.pfr.szvk.readwritefiles.StaxStreamProcessor;
+import ru.pfr.szvk.readwritefiles.*;
 import ru.pfr.szvk.readwritefiles.fromfms.RowFromFms;
 import ru.pfr.szvk.readwritefiles.xlsmodel.StreamExcel;
 
@@ -24,66 +22,21 @@ public class Model {
     }
 
 
-//    public List<Employee> getEmployee(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
-//        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
-//
-//        String pathD = "D:\\IdeaProject\\szvk\\mail\\inSZVK";
-//        log.info(String.join(" ", "Определен mail каталог", pathD));
-//        ReadDerectory rf= ReadDerectory.getInstance();
-//        log.info(String.join(" ", "файлы для обработки определены"));
-//        StaxStreamProcessor staxStreamProcessor = new StaxStreamProcessor();
-//        log.info(String.join(" ", "Инициализирован класс StaxStreamProcessor"));
-//
-//
-//        List<Employee> employees = new ArrayList<Employee>();
-//        log.info(String.join(" ", "Инициализирован список employees"));
-//
-//        for (StringBuffer file:rf.getListFiles(pathD)) {
-//            staxStreamProcessor.readXml(file.toString());
-//            log.info(String.join(" ", "обрабатывается файл", file.toString()));
-//            this.addDateToTable(dbHandler,staxStreamProcessor.getAllEmployee());
-//            log.info(String.join(" ", "В таблицу employees_from_policyholder добавлены записи из xml файлов"));
-////            for (Employee employee:staxStreamProcessor.getAllEmployee()) {
-////                LinkedHashMap linkedHashMapParam = new LinkedHashMap();
-////                linkedHashMapParam.put("snils",employee.getSnils().toString());
-////                linkedHashMapParam.put("country","");
-////                linkedHashMapParam.put("area","");
-////                linkedHashMapParam.put("region","");
-////                linkedHashMapParam.put("city","");
-////                Employee employeedb =dbHandler.getHumen("EMPLOYEES_FROM_MIC","snils",linkedHashMapParam);
-////                employee.setCountry(employeedb.getCountry());
-////                employee.setArea(employeedb.getArea());
-////                employee.setRegion(employeedb.getRegion());
-////                employee.setCity(employeedb.getCity());
-////                employees.add(employee);
-////                log.info(String.join(" ", "В employees добавлена запись"));
-////
-////            }
-//        }
-//
-//
-//
-////        dbHandler.close();
-//        Collections.sort(employees);
-//        return employees;
-//    }
-
-
     public void readDataFromXmlToDb(DbHandler dbHandler) throws IOException, XMLStreamException, SQLException {
         PropertyConfigurator.configure(String.join("",new File("").getAbsolutePath(),"\\src\\main\\resources\\log4j.properties"));
 
-        String pathD = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
+        String pathD = this.pathFromToZip;
         log.info(String.join(" ", "Определен mail каталог", pathD));
         ReadDerectory rf= ReadDerectory.getInstance();
         log.info(String.join(" ", "файлы для обработки определены"));
         StaxStreamProcessor staxStreamProcessor = new StaxStreamProcessor();
         log.info(String.join(" ", "Инициализирован класс StaxStreamProcessor"));
         this.uuidPachki = staxStreamProcessor.getUuidPachki();
-
+        List<StringBuffer> lisFiles = rf.getListFiles(pathD);
         List<Employee> employees = new ArrayList<Employee>();
         log.info(String.join(" ", "Инициализирован список employees"));
 
-        for (StringBuffer file:rf.getListFiles(pathD)) {
+        for (StringBuffer file:lisFiles) {
 
             staxStreamProcessor.readXml(file.toString());
             log.info(String.join(" ", "обрабатывается файл", file.toString()));
@@ -92,18 +45,15 @@ public class Model {
                 employees.add(employee);
             }
 
-//            System.out.println(staxStreamProcessor.getAllEmployee().toString());
-//            this.addDataFromPoliciholder(dbHandler,staxStreamProcessor.getAllEmployee());
-            log.info(String.join(" ", "В таблицу employees_from_policyholder добавлены записи из xml файлов"));
+            log.info(String.join(" ", "Из xml файлов данные прочитаны во временное хранилище"));
 
         }
         this.addDataFromPoliciholder(dbHandler,employees);
-        System.out.println(employees.size());
-        for (Employee e: employees
-             ) {
-            System.out.println(e.getSnils());
-        }
+        log.info(String.join(" ", "В таблицу employees_from_policyholder добавлены записи из xml файлов за исключением уже существующих в базе"));
+        log.info(String.join("","Количество полученых СНИЛС - ",String.valueOf(employees.size())));
 
+        this.toArchiv(pathD);
+        this.delete(pathD);
 //        dbHandler.close();
 
     }
@@ -146,12 +96,13 @@ public class Model {
         return new StreamExcel();
     }
 
-    public DbHandler getConnectDb(){
+    public DbHandler getConnectDb()  {
+
+            log.info(String.join(" ", "Инициализирован класс  DbHandler, Выполнено подключение к базе"));
         try {
-                    log.info(String.join(" ", "Инициализирован класс  DbHandler, Выполнено подключение к базе"));
             return DbHandler.getInstance();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return null;
     }
@@ -213,6 +164,22 @@ public class Model {
         }
 
     }
+
+    private void toArchiv(String path){
+        ZipFile toZip = new ZipFile();
+        toZip.write(path,this.uuidPachki);
+
+    }
+    private void delete(String path){
+        DeleteSzvkFiles delSzvk =new DeleteSzvkFiles();
+        delSzvk.deleteFiles(path);
+    }
+
+    public String getPathFromToZip() {
+        return pathFromToZip;
+    }
+
+    private String pathFromToZip = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
     private String uuidPachki;
     private static final Logger log = Logger.getLogger(Model.class);
 }

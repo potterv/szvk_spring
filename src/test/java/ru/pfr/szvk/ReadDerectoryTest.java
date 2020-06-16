@@ -19,11 +19,16 @@ public class ReadDerectoryTest {
 //        Тестовый  путь для проверки метода
 
         String pathD = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
-        System.out.println(pathD);
+//        System.out.println(pathD);
         ReadDerectory rf= ReadDerectory.getInstance();
-        rf.getListFiles(pathD);
-        List<StringBuffer> lf = new LinkedList<StringBuffer>();
-        lf.add(new StringBuffer("mail\\inSZVK\\PFR-700-Y-2019-ORG-092-001-000001-DCK-00020-DPT-000000-DCK-00000.XML"));
+
+        for (StringBuffer lf:rf.getListFiles(pathD)
+             ) {
+            System.out.println(lf);
+        }
+
+//        List<StringBuffer> lf = new LinkedList<StringBuffer>();
+//        lf.add(new StringBuffer("mail\\inSZVK\\PFR-700-Y-2019-ORG-092-001-000001-DCK-00020-DPT-000000-DCK-00000.XML"));
 //        lf.add(new StringBuffer("D:\\IdeaProject\\szvk\\mail\\R92_REG_ANSI.csv"));
 //        lf.add(new StringBuffer("D:\\IdeaProject\\szvk\\mail\\R92_REG_ANSI1.csv"));
 //        lf.sort(new StringBuffer((CharSequence) CASE_INSENSITIVE_ORDER));

@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileStorageImpl implements FileStorage{
 
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
-    private final Path rootLocation = Paths.get("filestorage");
+    private final Path rootLocation = Paths.get("mail\\inSZVK\\");
 
     @Override
     public void store(MultipartFile file){
@@ -68,7 +68,7 @@ public class FileStorageImpl implements FileStorage{
                     .map(this.rootLocation::relativize);
         }
         catch (IOException e) {
-            throw new RuntimeException("\"Failed to read stored file");
+            throw new RuntimeException("Failed to read stored file");
         }
     }
 }

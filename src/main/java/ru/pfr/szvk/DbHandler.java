@@ -33,23 +33,13 @@ public class DbHandler {
     private Connection connection;
 
     public Connection getConnection() {
-        return connection;
+        return this.connection;
     }
 
     private PreparedStatement pstmt = null;
     /**
      * @throws SQLException
      */
-//    private DbHandler() throws SQLException {
-//        // Регистрируем драйвер, с которым будем работать
-//        // в нашем случае Sqlite
-//        DriverManager.registerDriver(new JDBC());
-//        log.info("Драйвер для работы с базой зарегистрирован");
-//        // Выполняем подключение к базе данных
-//        this.connection = DriverManager.getConnection(CON_STR);
-//        log.info("Подключение к базе  выполнено");
-//
-//    }
 
     private DbHandler() throws SQLException {
         PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
@@ -57,14 +47,13 @@ public class DbHandler {
         String url="jdbc:db2://10.92.0.71:50000/szvk";
         String user="db2admin";
         String password="dB2@dm1n";
-//        Driver driver = new COM.ibm.db2.jdbc.app.DB2Driver();
-//        DriverManager.registerDriver(driver);
+
          this.connection = null;
         try {
-            //Load class into memory
+
             Class.forName(jdbcClassName);
             log.info("Драйвер для работы с базой зарегистрирован");
-            //Establish connection
+
             this.connection = DriverManager.getConnection(url, user, password);
             log.info(this.connection.getMetaData().toString());
             log.info("Подключение к базе  выполнено");
@@ -77,17 +66,11 @@ public class DbHandler {
             if (this.connection != null) {
                 log.info("Connected successfully.");
 
-//                connection.close();
+
             }
         }
 
-        // Регистрируем драйвер, с которым будем работать
-        // в нашем случае Sqlite
-//        DriverManager.registerDriver(new JDBC());
-//        log.info("Драйвер для работы с базой зарегистрирован");
-//        // Выполняем подключение к базе данных
-//        this.connection = DriverManager.getConnection(CON_STR);
-//        log.info("Подключение к базе  выполнено");
+
 
     }
     /**
@@ -163,8 +146,6 @@ public class DbHandler {
         }
     }
 
-
-
     /**
      * Метод для выборки информации из таблицы
      * @param nameTable - имя таблицы
@@ -185,7 +166,7 @@ public class DbHandler {
         String sql = "".join("",
                 "SELECT ",calls,
                 " FROM db2admin.",nameTable," WHERE ",nameColl,"=?");
-//        try (Statement statement = this.connection.createStatement()  )
+
         try (  PreparedStatement statement = this.connection.prepareStatement(sql))
         {
             statement.setObject(1, vallColl);
@@ -278,10 +259,7 @@ public class DbHandler {
 
             log.info("Данные из базы получены");
 
-
            while (resultSet.next()) {
-
-
 
                 if (resultSet.getString(nameColl)!=null){
                     isdDate =true;
@@ -322,14 +300,10 @@ public class DbHandler {
 
             }
 
-
-
            return employeeList;
-
 
         } catch (SQLException e) {
             log.error("Ошибка доступности данных");
-//            log.error("Это сообщение ошибки, Метод findHumen вернул пустой список");
             log.error(e.getSQLState());
             log.error(e.getStackTrace());
             return Collections.emptyList();
@@ -346,6 +320,7 @@ public class DbHandler {
      */
     public void addData(String nameTable, String keyControl , LinkedHashMap nameColls) throws SQLException {
         StringBuffer volue = new StringBuffer();
+
         try (PreparedStatement statement = this.connection.prepareStatement("".join("", "SELECT  distinct ", keyControl, ", UUID_R", " FROM db2admin.", nameTable, " Where ",keyControl," =?")))
 
          {
@@ -384,23 +359,23 @@ public class DbHandler {
             } else {
 
                 if(keyControl.equals("snils")){
+
                     log.warn("".join(" ", "Запись с "," UUID_R = ", resultSet.getString("UUID_R")," СНИЛС - ",nameColls.get(keyControl).toString()," существует в базе и  не будет добавлена в таблицу", nameTable));
                 }else{
                     log.warn("".join(" ", "Запись с "," UUID_R = ", resultSet.getString("UUID_R"),"  не будет добавлена в таблицу", nameTable));
                 }
 
-//                System.out.println();
             }
 
         }catch (Exception e){
             log.error(e.getMessage());
             log.error(e.getStackTrace().toString());
         }
+
     }
 
-    // Константа, в которой хранится адрес подключения
-//    private static final String CON_STR = "jdbc:sqlite:D:/IdeaProject/szvk/db/szvk.db";
     public void close() throws SQLException {
+
         this.connection.close();
     }
 

@@ -48,7 +48,7 @@ public class DownloadFileController {
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
         Resource file = fileStorage.loadFile(filename);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename().toString() + "\"")
                 .body(file);
     }
 }
