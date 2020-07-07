@@ -169,6 +169,7 @@ public class Model {
         ZipFile toZip = new ZipFile();
         toZip.write(path,this.uuidPachki);
 
+
     }
     private void delete(String path){
         DeleteSzvkFiles delSzvk =new DeleteSzvkFiles();

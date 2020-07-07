@@ -13,6 +13,15 @@ public class View {
 
     public View(List<Employee> employees, StreamExcel xlsWriter) throws IOException {
         xlsWriter.writeToXls(employees);
+        setNameFileXls(xlsWriter);
+    }
+    private void setNameFileXls(StreamExcel xls){
+        this.nameFileXls = xls.getNameFileToFms();
     }
 
+    public String getNameFileXls(){
+
+        return this.nameFileXls;
+    }
+    private String nameFileXls;
 }

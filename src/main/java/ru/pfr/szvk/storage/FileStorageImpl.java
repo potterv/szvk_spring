@@ -21,7 +21,7 @@ public class FileStorageImpl implements FileStorage{
 
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
     private final Path rootLocation = Paths.get("mail\\inSZVK\\");
-
+    private final Path rootDownloadPath= Paths.get("mail\\requests\\");
     @Override
     public void store(MultipartFile file){
         try {

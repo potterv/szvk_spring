@@ -25,6 +25,7 @@ public class StreamExcel implements InterfaceExcel {
     public StreamExcel(){
 
         PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+        nameFileToFms = String.join("",new File("").getAbsolutePath(),"\\mail\\requests\\toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".xls");
     }
 
     private HSSFCellStyle createStyleForTitle(HSSFWorkbook workbook) {
@@ -155,7 +156,7 @@ public class StreamExcel implements InterfaceExcel {
 
 
         }
-        File file = new File(String.join("",new File("").getAbsolutePath(),"\\mail\\requests\\toFMS_", new Date().toString().replaceAll("\\s","_").replaceAll(":","_"),".xls"));
+        File file = new File(nameFileToFms);
 //        file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);
@@ -218,6 +219,9 @@ public class StreamExcel implements InterfaceExcel {
         log.info("Загрузка данных от ФМС завершена");
         return  rowsfms;
     }
-
+    private String nameFileToFms;
+    public String getNameFileToFms(){
+        return nameFileToFms;
+    }
     private static final Logger log = Logger.getLogger(StreamExcel.class);
 }

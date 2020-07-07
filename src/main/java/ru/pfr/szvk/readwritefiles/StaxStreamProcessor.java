@@ -205,6 +205,8 @@ public class StaxStreamProcessor {
 
                 }
             }
+
+
         }else {
             log.warn(String.join("","Файл ",pathFile," не обработан так как его размер равен 0"));
         }
