@@ -48,12 +48,14 @@ public class ZipFile implements TypeFile{
                 fis.read(buffer);
                 // добавляем содержимое к архиву
                 zout.write(buffer);
+                fis.close();
                 log.info(String.join("","Файл СЗВ-К ",file.getName()," добавлен в архив ",nameArch));
 //                System.out.println(file.getAbsolutePath());
 
             }
 
             zout.closeEntry();
+              zout.close();
 
         }
         catch(Exception ex){
