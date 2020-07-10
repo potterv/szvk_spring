@@ -9,5 +9,5 @@ import java.util.List;
 
 interface InterfaceExcel {
      void writeToXls (List<Employee> employees) throws IOException;
-     List<RowFromFms> readFromXls() throws IOException;
+     List<AdrRowFromFms> readFromXls(String fileNameXlsFromFms) throws IOException;
 }

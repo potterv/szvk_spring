@@ -14,6 +14,7 @@ import ru.pfr.szvk.readwritefiles.fromfms.*;
 
 import ru.pfr.szvk.Employee;
 
+import javax.validation.constraints.Null;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -152,27 +153,26 @@ public class StreamExcel implements InterfaceExcel {
             cell = row.createCell(10, CellType.STRING);
             cell.setCellValue(emp.getCity().toString());
 
-
-
-
         }
         File file = new File(nameFileToFms);
 //        file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
+        workbook.close();
+        outFile.close();
         log.info(String.join(" ","Created file: -",file.getAbsolutePath()));
-//        workbook.close();
+//
 
 
     }
 
     @Override
-    public List<RowFromFms> readFromXls() throws IOException {
+    public List<AdrRowFromFms> readFromXls(String fileNameXlsFromFms) throws IOException {
        log.info("Начата  загрузка данных из файла xls от ФМС");
         List<Employee> employees =new LinkedList<Employee>();
         // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\response\\От ФМС 06.02.2020",".xls")));
+        FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\response\\",fileNameXlsFromFms)));
 
         // Get the workbook instance for XLS file
         HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
@@ -183,37 +183,45 @@ public class StreamExcel implements InterfaceExcel {
         // Get iterator to all the rows in current sheet
         Iterator<Row> rowIterator = sheet.iterator();
 
-        List<RowFromFms> rowsfms= new ArrayList<RowFromFms>();
+        List<AdrRowFromFms> rowsfms= new ArrayList<AdrRowFromFms>();
 
-        RowFromFms rowFromFms;
+        AdrRowFromFms adrRowFromFms;
         rowIterator.next();
         while (rowIterator.hasNext()) {
 
             Row row = rowIterator.next();
-            rowFromFms = new RowFromFms();
+            adrRowFromFms = new AdrRowFromFms();
 
-            rowFromFms.setUuidPachki(row.getCell(0).getStringCellValue().toString());
-            rowFromFms.setUuidRecord(row.getCell(1).getStringCellValue().toString());
+            adrRowFromFms.setUuidPachki(row.getCell(0).getStringCellValue().toString());
+            adrRowFromFms.setUuidRecord(row.getCell(1).getStringCellValue().toString());
 
+            adrRowFromFms.setCountry(row.getCell(7).getStringCellValue().toString());
+            adrRowFromFms.setArea(row.getCell(8).getStringCellValue().toString());
+            adrRowFromFms.setRegion(row.getCell(9).getStringCellValue().toString());
+            adrRowFromFms.setCity(row.getCell(10).getStringCellValue().toString());
             if (row.getCell(10).getStringCellValue().equals("да") ){
-                rowFromFms.setResidentCrimea(true);
+                adrRowFromFms.setResidentCrimea(true);
 
             }
-            if (row.getCell(10).getStringCellValue().equals("нет")){
-                rowFromFms.setResidentCrimea(false);
+            if (row.getCell(11).getStringCellValue().equals("нет")){
+                adrRowFromFms.setResidentCrimea(false);
             }
 
-            if (row.getLastCellNum()==11){
-                row.createCell(11, CellType.STRING);
+            if (row.getLastCellNum()==12){
+                row.createCell(12, CellType.STRING);
 //
-                rowFromFms.setCommentary("-");
+                adrRowFromFms.setCommentary("-");
 
             }else {
-                rowFromFms.setCommentary(row.getCell(11).getStringCellValue().toString());
+//                row.createCell(12, CellType.STRING);
+
+                adrRowFromFms.setCommentary(row.getCell(12).getStringCellValue().toString());
 
             }
 
-            rowsfms.add(rowFromFms);
+
+
+            rowsfms.add(adrRowFromFms);
 
         }
         log.info("Загрузка данных от ФМС завершена");

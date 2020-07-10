@@ -56,7 +56,7 @@ public class DownloadFileController {
      */
     @GetMapping("/files/{filename}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
-        Resource file = fileStorage.loadFile(filename);
+        Resource file = fileStorage.loadFile(filename,"xml");
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename().toString() + "\"")
                 .body(file);

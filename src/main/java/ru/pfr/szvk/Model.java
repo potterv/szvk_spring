@@ -5,6 +5,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 
 import ru.pfr.szvk.readwritefiles.*;
+import ru.pfr.szvk.readwritefiles.fromfms.AdrRowFromFms;
 import ru.pfr.szvk.readwritefiles.fromfms.RowFromFms;
 import ru.pfr.szvk.readwritefiles.xlsmodel.StreamExcel;
 
@@ -145,13 +146,13 @@ public class Model {
         }
     }
 
-    public void loadDataFromFms(DbHandler dbHandler, List<RowFromFms> rows) throws  SQLException {
+    public void loadDataFromFms(DbHandler dbHandler, List<AdrRowFromFms> rows) throws  SQLException {
 
 
         LinkedHashMap param = new LinkedHashMap();
 
 
-        for (RowFromFms row:rows) {
+        for (AdrRowFromFms row:rows) {
 
 //            param.put("snils",UUID.randomUUID().toString());
             param.put("uuid_P",row.getUuidPachki());
@@ -160,6 +161,16 @@ public class Model {
             param.put("commentary",row.getCommentary());
             param.put("date_load_file_from_fms_xls",LocalDate.now().toString());
             dbHandler.addData("FMS_DATA","uuid_R",param);
+            param.clear();
+
+            param.put("uuid_P",row.getUuidPachki());
+            param.put("uuid_R",row.getUuidRecord());
+            param.put("country",row.getCountry());
+            param.put("area",row.getArea());
+            param.put("region",row.getRegion());
+            param.put("city",row.getCity());
+            param.put("date_load_file_from_fms_xls",LocalDate.now().toString());
+            dbHandler.addData("ADRESS","uuid_R",param);
             param.clear();
         }
 

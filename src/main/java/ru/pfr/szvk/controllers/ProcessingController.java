@@ -49,11 +49,9 @@ public class ProcessingController {
     public String processingPost(Model model){
          log.info("Старт обработки");
 
-
         try {
 
             this.wraperM.getModel().readDataFromXmlToDb(this.dbHandler);
-//            this.wraperM.getModel().delete(ReadDerectory.PATHINSZVK);
 
         } catch (IOException e) {
             e.printStackTrace();
