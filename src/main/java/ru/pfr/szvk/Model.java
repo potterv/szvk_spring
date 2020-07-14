@@ -154,7 +154,7 @@ public class Model {
 
         for (AdrRowFromFms row:rows) {
 
-//            param.put("snils",UUID.randomUUID().toString());
+////            param.put("snils",UUID.randomUUID().toString());
             param.put("uuid_P",row.getUuidPachki());
             param.put("uuid_R",row.getUuidRecord());
             param.put("Resident_Crimea",row.isResidentCrimea());
@@ -173,6 +173,8 @@ public class Model {
             dbHandler.addData("ADRESS","uuid_R",param);
             param.clear();
         }
+        this.toArchiv(this.pathFromXlsToZip);
+        this.delete(this.pathFromXlsToZip);
 
     }
 
@@ -192,6 +194,7 @@ public class Model {
     }
 
     private String pathFromToZip = String.join("",new File("").getAbsolutePath(),"\\mail\\inSZVK");
+    private String pathFromXlsToZip = String.join("",new File("").getAbsolutePath(),"\\mail\\response");
     private String uuidPachki;
     private static final Logger log = Logger.getLogger(Model.class);
 }

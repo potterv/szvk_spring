@@ -169,10 +169,11 @@ public class StreamExcel implements InterfaceExcel {
 
     @Override
     public List<AdrRowFromFms> readFromXls(String fileNameXlsFromFms) throws IOException {
-       log.info("Начата  загрузка данных из файла xls от ФМС");
+       log.info(toString().join("","Начата  загрузка данных из файла ",fileNameXlsFromFms," от ФМС"));
         List<Employee> employees =new LinkedList<Employee>();
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(String.join("",new File("").getAbsolutePath(),"\\mail\\response\\",fileNameXlsFromFms)));
+//        FileInputStream inputStream = new FileInputStream(new File(fileNameXlsFromFms));
 
         // Get the workbook instance for XLS file
         HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
@@ -224,6 +225,8 @@ public class StreamExcel implements InterfaceExcel {
             rowsfms.add(adrRowFromFms);
 
         }
+        inputStream.close();
+        workbook.close();
         log.info("Загрузка данных от ФМС завершена");
         return  rowsfms;
     }

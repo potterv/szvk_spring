@@ -349,12 +349,17 @@ public class DbHandler {
                     for (int countValue = 0; countValue<nameColls.size();countValue++){
                       statement1.setObject(countValue+1,  nameColls.values().toArray()[countValue].toString());
                     }
-                    log.info("".join("","В таблицу ", nameTable," добавлена запись с uuid",nameColls.get("uuid_R").toString()));
                     statement1.executeUpdate();
+                    log.info("".join("","В таблицу ", nameTable," добавлена запись с uuid ",nameColls.get("uuid_R").toString()));
+
 
                 }catch (Exception e){
+
                     log.error(e.getMessage());
                     log.error(e.getStackTrace().toString());
+
+                    log.info("".join("","В таблицу ", nameTable," не добавлена запись с uuid ",nameColls.get("uuid_R").toString()));
+
                 }
             } else {
 
@@ -371,6 +376,7 @@ public class DbHandler {
             log.error(e.getMessage());
             log.error(e.getStackTrace().toString());
         }
+
 
     }
 
