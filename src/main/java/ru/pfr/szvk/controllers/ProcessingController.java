@@ -44,8 +44,6 @@ public class ProcessingController {
         this.dbHandler.setConnection();
     }
 
-
-
     @GetMapping("/processing")
     @PostMapping("/processing")
     public String processingPost(Model model){
@@ -75,23 +73,13 @@ public class ProcessingController {
     @Autowired
     private ServletContext servletContext;
 
-    // http://localhost:8080/download1?fileName=abc.zip
-    // Using ResponseEntity<InputStreamResource>
+
     @RequestMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile1(
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
         this.dbHandler.getConnection();
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-//        System.out.println("fileName: " + fileName);
-//        System.out.println("mediaType: " + mediaType);
-
         this.view=this.wraperM.setView(this.wraperM.getModel().getEmployeeList(this.dbHandler),this.wraperM.getModel().getXls());
-
-//        try {
-//            this.dbHandler.getConnection().close();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
         this.nameFile=this.view.getNameFileXls();
 
         fileName = this.nameFile;
@@ -108,9 +96,7 @@ public class ProcessingController {
                 .body(resource);
     }
 
-//    public static String getNameFile() {
-//        return nameFile;
-//    }
+
     @GetMapping("/uploadformXls")
     public String uploadformXls() {
         return "uploadformXls";
@@ -152,14 +138,28 @@ public class ProcessingController {
             e.printStackTrace();
             log.error(e.getMessage());
         }
-//        try {
-////            this.dbHandler.getConnection().close();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//            log.error(throwables.getMessage());
-//        }
+
         return "uploadformXls";
     }
+
+
+    @GetMapping("/inputsnils")
+    public String infosnils() {
+        return "inputsnils";
+    }
+
+    @PostMapping("/infosnils")
+    public String infosnils(@RequestParam("snils") String snils,  Model model) {
+
+        log.info("Начат поиск СНИЛС в базе");
+
+
+            model.addAttribute("snils", snils);
+
+
+        return "infosnils";
+    }
+
 
     @Autowired
     FileStorage fileStorage;
