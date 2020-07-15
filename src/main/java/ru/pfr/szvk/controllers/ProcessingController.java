@@ -41,6 +41,7 @@ public class ProcessingController {
         PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
         this.wraperM = new WraperM();
         this.dbHandler = this.wraperM.getModel().getConnectDb();
+        this.dbHandler.setConnection();
     }
 
 
@@ -51,9 +52,10 @@ public class ProcessingController {
          log.info("Старт обработки");
 
         try {
-            this.dbHandler.getConnection();
+
+
             this.wraperM.getModel().readDataFromXmlToDb(this.dbHandler);
-            this.dbHandler.getConnection().close();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,11 +87,11 @@ public class ProcessingController {
 
         this.view=this.wraperM.setView(this.wraperM.getModel().getEmployeeList(this.dbHandler),this.wraperM.getModel().getXls());
 
-        try {
-            this.dbHandler.getConnection().close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+//        try {
+//            this.dbHandler.getConnection().close();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
         this.nameFile=this.view.getNameFileXls();
 
         fileName = this.nameFile;
@@ -138,6 +140,8 @@ public class ProcessingController {
         log.info("Загроузка файла от ФМС на сервер завершена");
         this.dbHandler.getConnection();
         try {
+//            this.dbHandler.setConnection();
+
             this.wraperM.getModel().loadDataFromFms(dbHandler, this.streamExcel.readFromXls(fileNames.get(0)));
             log.info("Данные из файла xls от ФМС загружены в базу");
         } catch (SQLException throwables) {
@@ -148,12 +152,12 @@ public class ProcessingController {
             e.printStackTrace();
             log.error(e.getMessage());
         }
-        try {
-            this.dbHandler.getConnection().close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            log.error(throwables.getMessage());
-        }
+//        try {
+////            this.dbHandler.getConnection().close();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//            log.error(throwables.getMessage());
+//        }
         return "uploadformXls";
     }
 

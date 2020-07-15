@@ -99,8 +99,9 @@ public class Model {
 
     public DbHandler getConnectDb()  {
 
-            log.info(String.join(" ", "Инициализирован класс  DbHandler, Выполнено подключение к базе"));
+
         try {
+            log.info(String.join(" ", "Инициализирован класс  DbHandler, Выполнено подключение к базе"));
             return DbHandler.getInstance();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

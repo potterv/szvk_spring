@@ -35,20 +35,8 @@ public class DbHandler {
     public Connection getConnection() {
         return this.connection;
     }
-
-    private PreparedStatement pstmt = null;
-    /**
-     * @throws SQLException
-     */
-
-    private DbHandler() throws SQLException {
-        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
-        String jdbcClassName="com.ibm.db2.jcc.DB2Driver";
-        String url="jdbc:db2://10.92.0.71:50000/szvk";
-        String user="db2admin";
-        String password="dB2@dm1n";
-
-         this.connection = null;
+    public void setConnection(){
+        this.connection = null;
         try {
 
             Class.forName(jdbcClassName);
@@ -69,6 +57,19 @@ public class DbHandler {
 
             }
         }
+    }
+    private PreparedStatement pstmt = null;
+    /**
+     * @throws SQLException
+     */
+
+    private DbHandler() throws SQLException {
+        PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
+         this.jdbcClassName="com.ibm.db2.jcc.DB2Driver";
+         this.url="jdbc:db2://10.92.0.71:50000/szvk";
+         this.user="db2admin";
+         this.password="dB2@dm1n";
+
 
 
 
@@ -385,6 +386,10 @@ public class DbHandler {
         this.connection.close();
     }
 
+    private String jdbcClassName="com.ibm.db2.jcc.DB2Driver";
+    private String url="jdbc:db2://10.92.0.71:50000/szvk";
+    private String user="db2admin";
+    private String password="dB2@dm1n";
     private static final Logger log = Logger.getLogger(DbHandler.class);
 
 
