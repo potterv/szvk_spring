@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.pfr.szvk.DbHandler;
+import ru.pfr.szvk.Employee;
 import ru.pfr.szvk.MediaType.MediaTypeUtils;
 import ru.pfr.szvk.View;
 import ru.pfr.szvk.WraperM;
@@ -128,7 +129,7 @@ public class ProcessingController {
         try {
 //            this.dbHandler.setConnection();
 
-            this.wraperM.getModel().loadDataFromFms(dbHandler, this.streamExcel.readFromXls(fileNames.get(0)));
+            this.wraperM.getModel().loadDataFromFms(this.dbHandler, this.streamExcel.readFromXls(fileNames.get(0).toString()));
             log.info("Данные из файла xls от ФМС загружены в базу");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -151,10 +152,37 @@ public class ProcessingController {
     @PostMapping("/infosnils")
     public String infosnils(@RequestParam("snils") String snils,  Model model) {
 
+
         log.info("Начат поиск СНИЛС в базе");
+           this.employees= wraperM.getModel().getEmployeeList(dbHandler,snils);
 
+//           if (employees.size()<1){
+//
+//            }
+//        model.addAttribute("snils", employees.get(0).getSnils());
+//        model.addAttribute("surname", employees.get(0).getSurname());
+//        model.addAttribute("name", employees.get(0).getName());
+//        model.addAttribute("Patronymic", employees.get(0).getPatronymic());
+        try{
+            log.info(this.employees.get(0).getUuidRecord().toString());
+            model.addAttribute("uuid_p", this.employees.get(0).getUuidPachka());
+            model.addAttribute("uuid_r", this.employees.get(0).getUuidRecord().toString());
+            model.addAttribute("snils", this.employees.get(0).getSnils());
+            model.addAttribute("surname", this.employees.get(0).getSurname());
+            model.addAttribute("name", this.employees.get(0).getName());
+            model.addAttribute("Patronymic", this.employees.get(0).getPatronymic());
+            model.addAttribute("Birthday", this.employees.get(0).getBirthday());
+            model.addAttribute("Country", this.employees.get(0).getCountry());
+            model.addAttribute("Area", this.employees.get(0).getArea());
+            model.addAttribute("Region", this.employees.get(0).getRegion());
+            model.addAttribute("City", this.employees.get(0).getCity());
+            model.addAttribute("ResidenceCrimea", this.employees.get(0).getResidenceCrimea());
+//            model.addAttribute("Country", employees.get(0));
+            }
+        catch (IndexOutOfBoundsException e ){
+              model.addAttribute("errorMmasage", String.join("","Снилс ",snils," не найден в таблице ответов от ФМС"));
+            }
 
-            model.addAttribute("snils", snils);
 
 
         return "infosnils";
@@ -169,5 +197,6 @@ public class ProcessingController {
     private WraperM wraperM;
     private  String nameFile;
     private DbHandler dbHandler;
+    private List<Employee> employees ;
     private static final Logger log = Logger.getLogger(ProcessingController.class);
 }

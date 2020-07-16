@@ -32,9 +32,54 @@ Released   : 20131117
 <header th:insert="blocks/head::header"></header>
 
 <div class="container mt-0">
-	<span th:utext="${snils}"></span>
+    <div class="h-15">
+		<div class="col-sm-10">
 
+			<span th:utext="${errorMmasage}"></span>
+
+			<label class="control-label" >Служебная информация:</label>
+			<br/>
+			<label class="control-label" >uuid пачки:</label>
+			<span th:utext="${uuid_p}"></span>
+
+			<label class="control-label" >uuid записи:</label>
+			<span th:utext="${uuid_r}"></span>
+			<br/>
+			<label class="control-label" >СНИЛС:</label>
+			<span th:utext="${snils}"></span>
+
+			<label class="control-label" >ФИО:</label>
+			<span th:utext="${surname}"></span>
+			<span th:utext="${name}"></span>
+			<span th:utext="${Patronymic}"></span>
+
+			<label class="control-label" >Дата рождения:</label>
+			<span th:utext="${Birthday}"></span>
+			<br/>
+			<label class="control-label" >Место жительства:</label>
+			<br/>
+			<label class="control-label" >Страна:</label>
+			<span th:utext="${Country}"></span>
+
+			<label class="control-label" >Область:</label>
+
+			<span th:utext="${Area}"></span>
+
+			<label class="control-label" >регион:</label>
+			<span th:utext="${Region}"></span>
+
+			<label class="control-label" >Город:</label>
+			<span th:utext="${City}"></span>
+			<br/>
+			<label class="control-label" >Признак резидентности на момент 18.03.2014:</label>
+			<span th:utext="${ResidenceCrimea}"></span>
+
+
+		</div>
+	</div>
 </div>
+
+
 <footer th:insert="blocks/footer::footer"></footer>
 </body>
 </html>

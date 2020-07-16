@@ -25,6 +25,7 @@ public class modelTest {
 
         Model m = new Model();
         DbHandler dbHandler = DbHandler.getInstance();
-        m.loadDataFromFms(dbHandler,streamExcel.readFromXls("Проверка УВМ 08.06.2020.xls"));
+        dbHandler.setConnection();
+        m.loadDataFromFms(dbHandler,streamExcel.readFromXls("Проверка УВМ 01_06_2020 со СНИЛС.xls"));
     }
 }

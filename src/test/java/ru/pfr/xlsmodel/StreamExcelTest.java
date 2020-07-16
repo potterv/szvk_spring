@@ -36,6 +36,6 @@ public class StreamExcelTest {
     @Test
     public void readFromXls() throws IOException {
         StreamExcel streamExcel = new StreamExcel();
-        System.out.println(streamExcel.readFromXls("Проверка УВМ 08.06.2020.xls"));
+        System.out.println(streamExcel.readFromXls("Проверка УВМ 01_06_2020 со СНИЛС.xls"));
     }
 }

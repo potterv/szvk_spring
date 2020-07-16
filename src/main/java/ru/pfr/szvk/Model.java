@@ -82,10 +82,34 @@ public class Model {
         return employees;
     }
 
-    public List<Employee> getAllEmployees(DbHandler dbHandler){
+    public List<Employee> getEmployeeList(DbHandler dbHandler,String snils){
 
-        return  dbHandler.getAllEployees();
+        LinkedHashMap param = new LinkedHashMap();
+        param.put("snils",snils);
+        param.put("uuid_P","");
+        param.put("uuid_R","");
+        param.put("surname","");
+        param.put("name","");
+        param.put("patronymic","");
+        param.put("birthday","");
+        param.put("country","");
+        param.put("area","");
+        param.put("region","");
+        param.put("city","");
+        param.put("resident_crimea","");
+//        param.put("numberInsured","");
+//        param.put("nameInsured","");
+        List<Employee> employees = new LinkedList<Employee>();
+        employees = dbHandler.getEmployees("view_for_Zablag","snils",param);
+//        Collections.sort(employees);
+        return employees;
     }
+
+
+//    public List<Employee> getAllEmployees(DbHandler dbHandler){
+//
+//        return  dbHandler.getAllEployees();
+//    }
 
     public CsvWriter getCsv(){
 
@@ -117,10 +141,10 @@ public class Model {
 
 
     }
-    public Connection getConnaction(){
-
-        return null;
-    }
+//    public Connection getConnaction(){
+//
+//        return null;
+//    }
     public void addDataFromPoliciholder(DbHandler dbHandler, List<Employee> employeeList) throws SQLException {
         LinkedHashMap param = new LinkedHashMap();
         for (Employee employee:employeeList) {

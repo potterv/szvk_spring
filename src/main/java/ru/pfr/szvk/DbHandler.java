@@ -99,7 +99,7 @@ public class DbHandler {
             // В resultSet будет храниться результат нашего запроса,
             // который выполняется командой statement.executeQuery()
 //            ResultSet resultSet = statement.executeQuery("SELECT snils, country, area, region, city  FROM HUMEN");
-            pstmt=this.connection.prepareStatement("SELECT distinct snils,uuid_p, uuid_r,surname, name, country, patronymic,birthday, area, region, city  FROM db2admin.view_employee_with_adress order by surname");
+            this.pstmt=this.connection.prepareStatement("SELECT distinct snils,uuid_p, uuid_r,surname, name, country, patronymic,birthday, area, region, city  FROM db2admin.view_employee_with_adress order by surname");
 //            pstmt.setObject(1,snils);
             ResultSet resultSet = pstmt.executeQuery();
             // Проходимся по нашему resultSet и заносим данные в products
@@ -239,11 +239,12 @@ public class DbHandler {
         String area ="-";
         String region = "-";
         String city = "-";
+        String commentary = "-";
 
         String calls =  param.keySet().toString().replaceAll("\\["," ").replaceAll("]"," ").replaceAll(" ","");
 
 
-        String vallColl = param.get("uuid_P").toString();
+        String vallColl = param.get(nameColl).toString();
 
         String sql = "".join("",
                 "SELECT distinct ",calls,
@@ -285,21 +286,48 @@ public class DbHandler {
                     city = "-";
                 }
 
-                employeeList.add( new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
+//
+//               if (nameTable.equals("view_for_Zablag")){
+//                   commentary = resultSet.getString("COMMENTARY");
+//                  if (commentary == null) {
+//                      commentary = "-";
+//                   }
+//                   employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
+//
+//                           new StringBuffer(resultSet.getString(nameColls[1].toString())),
+//                           new StringBuffer(resultSet.getString(nameColls[2].toString())),
+//                           new StringBuffer(resultSet.getString(nameColls[3].toString())),
+//                           new StringBuffer(resultSet.getString(nameColls[4].toString())),
+//                           new StringBuffer(resultSet.getString(nameColls[5].toString())),
+//                           LocalDate.parse(resultSet.getString("birthday")),
+//                           new StringBuffer(country),
+//                           new StringBuffer(area),
+//                           new StringBuffer(region),
+//                           new StringBuffer(city),
+//                           new StringBuffer(resultSet.getString(nameColls[11].toString()).toString()),
+//                           new StringBuffer(commentary)
+//                   ).buidl());
+//               }
 
-                        new StringBuffer(resultSet.getString(nameColls[1].toString())),
-                        new StringBuffer(resultSet.getString(nameColls[2].toString())),
-                        new StringBuffer(resultSet.getString(nameColls[3].toString())),
-                        new StringBuffer(resultSet.getString(nameColls[4].toString())),
-                        new StringBuffer(resultSet.getString(nameColls[5].toString())),
-                        LocalDate.parse(resultSet.getString("birthday")),
-                        new StringBuffer(country),
-                        new StringBuffer(area),
-                        new StringBuffer(region),
-                        new StringBuffer(city)
-                         ).buidl());
+//               if (nameTable.equals("VIEW_UNICAL_SNILS")){
+                   employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
 
-            }
+                           new StringBuffer(resultSet.getString(nameColls[1].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[2].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[3].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[4].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[5].toString())),
+                           LocalDate.parse(resultSet.getString("birthday")),
+                           new StringBuffer(country),
+                           new StringBuffer(area),
+                           new StringBuffer(region),
+                           new StringBuffer(city)
+
+                   ).buidl());
+//               }
+
+
+           }
 
            return employeeList;
 

@@ -200,11 +200,12 @@ public class StreamExcel implements InterfaceExcel {
             adrRowFromFms.setArea(row.getCell(8).getStringCellValue().toString());
             adrRowFromFms.setRegion(row.getCell(9).getStringCellValue().toString());
             adrRowFromFms.setCity(row.getCell(10).getStringCellValue().toString());
-            if (row.getCell(10).getStringCellValue().equals("да") ){
+            log.info(String.join("","Признак резидента от ФМС ",row.getCell(11).getStringCellValue().toString()));
+            if (row.getCell(11).getStringCellValue().toString().equals("да") ){
                 adrRowFromFms.setResidentCrimea(true);
 
             }
-            if (row.getCell(11).getStringCellValue().equals("нет")){
+            if (row.getCell(11).getStringCellValue().toString().equals("нет")){
                 adrRowFromFms.setResidentCrimea(false);
             }
 

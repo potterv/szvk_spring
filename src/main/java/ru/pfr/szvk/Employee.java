@@ -90,6 +90,9 @@ public class Employee implements Comparable<Employee>{
     public void setCity(StringBuffer city) {
         this.city = city;
     }
+    public void setResidenceCrimea(StringBuffer valResidenceCrimea ) {
+        this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
+    }
 
     private Employee(Builder builder) {
         this.uuidPachka = builder.uuidPachka;
@@ -191,6 +194,35 @@ public class Employee implements Comparable<Employee>{
             return this;
         }
 
+        public Builder  getPolicyholder(StringBuffer valUuidPachka,
+                                        StringBuffer valUuidRecord,
+                                        StringBuffer valSurname,
+                                        StringBuffer valName,
+                                        StringBuffer valPatronymic,
+                                        LocalDate valBirthday,
+                                        StringBuffer valCountry,
+                                        StringBuffer valArea,
+                                        StringBuffer valRegion,
+                                        StringBuffer valCity,
+                                        StringBuffer valResidenceCrimea,
+                                        StringBuffer commentary){
+//
+
+            this.uuidPachka=valUuidPachka;
+            this.uuidRecord=valUuidRecord;
+            this.surname = valSurname;
+            this.name = valName;
+            this.patronymic = valPatronymic;
+            this.birthday = valBirthday;
+            this.country = valCountry;
+            this.area = valArea;
+            this.region = valRegion;
+            this.city = valCity;
+            this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
+            this.commentary= commentary;
+            return this;
+        }
+
         public  Builder getPFR(StringBuffer valCountry, StringBuffer valArea, StringBuffer valRegion, StringBuffer valCity){
             this.surname = surname;
             this.name = name;
@@ -227,7 +259,7 @@ public class Employee implements Comparable<Employee>{
         private boolean residenceCrimea;
         private StringBuffer  namepolicyholdershort;
         private StringBuffer regnumber;
-
+        private StringBuffer commentary;
     }
 
 
@@ -249,5 +281,6 @@ public class Employee implements Comparable<Employee>{
     private boolean residenceCrimea;
     private StringBuffer  namepolicyholdershort;
     private StringBuffer regnumber;
+    private StringBuffer commentary;
 
 }
