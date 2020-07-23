@@ -607,3 +607,9 @@ ul.style3 .first {
 		text-align: center;
 		color: rgba(255,255,255,1);
 	}
+	span{
+	    margin: 2;
+        padding: 2;
+        text-size 14;
+        font-weight:bold;
+	}

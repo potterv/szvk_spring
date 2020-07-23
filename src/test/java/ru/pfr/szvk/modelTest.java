@@ -15,8 +15,10 @@ public class modelTest {
     public void print() throws IOException, XMLStreamException, SQLException {
         Model m = new Model();
         DbHandler dbHandler = DbHandler.getInstance();
+        dbHandler.setConnection();
         m.readDataFromXmlToDb(dbHandler);
 //        m.getCsv().saveCsv(m.getEmployeeList(dbHandler));
+        m.getXls().writeToXls(m.getEmployeeList(dbHandler));
 
     }
     @Test

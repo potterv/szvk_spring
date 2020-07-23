@@ -239,13 +239,20 @@ public class DbHandler {
         String area ="-";
         String region = "-";
         String city = "-";
-        String commentary = "-";
+        String uuid_p="-";
+        String uuid_r="-";
+        String birthday ="-";
+        String rescrimea ="-";
+        String comentary ="-";
+        String dateLoadFileXml ="-";
+        String dateLoadFileFromFfmsXls ="-";
+
+        log.info(" таблица с которой работаем "+nameTable);
 
         String calls =  param.keySet().toString().replaceAll("\\["," ").replaceAll("]"," ").replaceAll(" ","");
 
-
         String vallColl = param.get(nameColl).toString();
-
+        log.info(String.join("","В xls файл выгружен пакет ",vallColl));
         String sql = "".join("",
                 "SELECT distinct ",calls,
                 " FROM db2admin.",nameTable," WHERE ",nameColl,"=? order by surname");
@@ -266,8 +273,41 @@ public class DbHandler {
                 if (resultSet.getString(nameColl)!=null){
                     isdDate =true;
                 }
+               snils = resultSet.getString("snils");
 
-                snils = resultSet.getString("snils");
+               uuid_p = resultSet.getString(nameColls[1].toString());
+               if (uuid_p == null) {
+                   uuid_p = "-";
+               }
+               uuid_r = resultSet.getString(nameColls[2].toString());
+               if (uuid_r == null) {
+                   uuid_r = "-";
+               }
+
+               birthday = resultSet.getString("birthday");
+               if (birthday == null) {
+                   birthday = "1582-02-24";
+               }
+
+               rescrimea = resultSet.getString(nameColls[11].toString());
+               if (rescrimea == null) {
+                   rescrimea = "-";
+               }
+               comentary = resultSet.getString(nameColls[12].toString());
+               if (comentary == null) {
+                   comentary = "-";
+               }
+
+
+               dateLoadFileXml= resultSet.getString(nameColls[13].toString());
+               if (dateLoadFileXml == null) {
+                   dateLoadFileXml = "-";
+               }
+               dateLoadFileFromFfmsXls= resultSet.getString(nameColls[14].toString());
+               if (dateLoadFileFromFfmsXls == null) {
+                   dateLoadFileFromFfmsXls = "-";
+               }
+
 
                 country = resultSet.getString(nameColls[7].toString());
                 if (country == null) {
@@ -287,29 +327,28 @@ public class DbHandler {
                 }
 
 //
-//               if (nameTable.equals("view_for_Zablag")){
-//                   commentary = resultSet.getString("COMMENTARY");
-//                  if (commentary == null) {
-//                      commentary = "-";
-//                   }
-//                   employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
-//
-//                           new StringBuffer(resultSet.getString(nameColls[1].toString())),
-//                           new StringBuffer(resultSet.getString(nameColls[2].toString())),
-//                           new StringBuffer(resultSet.getString(nameColls[3].toString())),
-//                           new StringBuffer(resultSet.getString(nameColls[4].toString())),
-//                           new StringBuffer(resultSet.getString(nameColls[5].toString())),
-//                           LocalDate.parse(resultSet.getString("birthday")),
-//                           new StringBuffer(country),
-//                           new StringBuffer(area),
-//                           new StringBuffer(region),
-//                           new StringBuffer(city),
-//                           new StringBuffer(resultSet.getString(nameColls[11].toString()).toString()),
-//                           new StringBuffer(commentary)
-//                   ).buidl());
-//               }
+               if (nameTable.equals("view_for_ocenka")){
 
-//               if (nameTable.equals("VIEW_UNICAL_SNILS")){
+                   employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
+
+                           new StringBuffer(uuid_p),
+                           new StringBuffer(uuid_r),
+                           new StringBuffer(resultSet.getString(nameColls[3].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[4].toString())),
+                           new StringBuffer(resultSet.getString(nameColls[5].toString())),
+                           LocalDate.parse(birthday),
+                           new StringBuffer(country),
+                           new StringBuffer(area),
+                           new StringBuffer(region),
+                           new StringBuffer(city),
+                           new StringBuffer(rescrimea),
+                           new StringBuffer(comentary),
+                           new StringBuffer(dateLoadFileXml),
+                           new StringBuffer(dateLoadFileFromFfmsXls)
+                   ).buidl());
+               }
+
+               if (nameTable.equals("VIEW_UNICAL_SNILS")){
                    employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
 
                            new StringBuffer(resultSet.getString(nameColls[1].toString())),
@@ -324,7 +363,7 @@ public class DbHandler {
                            new StringBuffer(city)
 
                    ).buidl());
-//               }
+               }
 
 
            }

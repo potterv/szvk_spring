@@ -21,7 +21,7 @@ Released   : 20131117
 <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/serch.css" rel="stylesheet" type="text/css" media="all" />
+<!--<link href="css/serch.css" rel="stylesheet" type="text/css" media="all" />-->
 <!--	<link rel="stylesheet" th:href="@{/css/fonts.css}">-->
 <!--	<link rel="stylesheet" th:href="@{/css/default.css}">-->
 <!--[if IE 6]>
@@ -31,48 +31,76 @@ Released   : 20131117
 <body>
 <header th:insert="blocks/head::header"></header>
 
+<div class="container mt-1 mb-1">
+
+	<div class="center ok"><h5>Введите СНИЛС для поиска информации в базе СЗВ-К о факте проживания в г. Севастополе на 18.03.2014 </h5></div>
+	<form th:action="@{/infosnils}" method="post">
+
+		<input type="text" size="50" name="snils" class="form-control" id = "snils" placeholder="Введите СНИЛС в формате XXX-XXX-XXX XX">
+		<div class=" mt-1 mb-1">
+			<button type="submit" class="btn btn-default" id="btnSubmit" value="Выполнить поиск">Выполнить поиск</button>
+		</div>
+
+
+	</form>
+
+
+</div>
+<br/>
+
 <div class="container mt-0">
-    <div class="h-15">
+
+
+	<div class="h-15">
+
 		<div class="col-sm-10">
 
 			<span th:utext="${errorMmasage}"></span>
 
-			<label class="control-label" >Служебная информация:</label>
-			<br/>
-			<label class="control-label" >uuid пачки:</label>
-			<span th:utext="${uuid_p}"></span>
-
-			<label class="control-label" >uuid записи:</label>
-			<span th:utext="${uuid_r}"></span>
-			<br/>
-			<label class="control-label" >СНИЛС:</label>
+           <br/>
+			<label class="control-label" >СНИЛС: </label>
 			<span th:utext="${snils}"></span>
-
-			<label class="control-label" >ФИО:</label>
+        <br/>
+		<label class="control-label" >ФИО:</label>
 			<span th:utext="${surname}"></span>
 			<span th:utext="${name}"></span>
 			<span th:utext="${Patronymic}"></span>
-
-			<label class="control-label" >Дата рождения:</label>
+		<br/>
+		<label class="control-label" >Дата рождения:</label>
 			<span th:utext="${Birthday}"></span>
-			<br/>
-			<label class="control-label" >Место жительства:</label>
-			<br/>
-			<label class="control-label" >Страна:</label>
+		<br/>
+		<label class="control-label" >Место рождения:</label>
+		<br/>
+		<label class="control-label" >Страна:</label>
 			<span th:utext="${Country}"></span>
-
-			<label class="control-label" >Область:</label>
-
+		<label class="control-label" >Область:</label>
 			<span th:utext="${Area}"></span>
-
-			<label class="control-label" >регион:</label>
-			<span th:utext="${Region}"></span>
-
-			<label class="control-label" >Город:</label>
+		<label class="control-label" >регион:</label>
+     		<span th:utext="${Region}"></span>
+		<label class="control-label" >Город:</label>
 			<span th:utext="${City}"></span>
-			<br/>
-			<label class="control-label" >Признак резидентности на момент 18.03.2014:</label>
+		<br/>
+    	<label class="control-label" >Признак резидентности на момент 18.03.2014:</label>
 			<span th:utext="${ResidenceCrimea}"></span>
+		<br/>
+		<label class="control-label" >Коментарий:</label>
+			<span th:utext="${Commentary}"></span>
+		<br/>
+			<span th:utext="${dateLoadFileXml}"></span>
+
+		<br/>
+			<span th:utext="${dateLoadFileFromFfmsXls}"></span>
+
+			<br/>
+			<label class="control-label" >Служебная информация:</label>
+		<br/>
+		<label class="control-label" >uuid пачки:</label>
+    		<span th:utext="${uuid_p}"></span>
+		<br/>
+		<label class="control-label" >uuid записи:</label>
+			<span th:utext="${uuid_r}"></span>
+		<br/>
+
 
 
 		</div>

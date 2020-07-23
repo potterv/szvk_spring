@@ -63,7 +63,9 @@ public class Model {
 
         LinkedHashMap param = new LinkedHashMap();
         param.put("snils","");
-        param.put("uuid_P",this.uuidPachki);
+
+        param.put("uuid_P",this.uuidPachki.toString());
+
         param.put("uuid_R","");
         param.put("surname","");
         param.put("name","");
@@ -77,7 +79,7 @@ public class Model {
 //        param.put("numberInsured","");
 //        param.put("nameInsured","");
         List<Employee> employees = new LinkedList<Employee>();
-        employees = dbHandler.getEmployees("VIEW_UNICAL_SNILS","UUID_P",param);
+        employees = dbHandler.getEmployees("VIEW_UNICAL_SNILS","uuid_P",param);
 //        Collections.sort(employees);
         return employees;
     }
@@ -97,10 +99,11 @@ public class Model {
         param.put("region","");
         param.put("city","");
         param.put("resident_crimea","");
-//        param.put("numberInsured","");
-//        param.put("nameInsured","");
+        param.put("commentary","");
+        param.put("DATE_LOAD_FILE_XML","");
+        param.put("DATE_LOAD_FILE_FROM_FMS_XLS","");
         List<Employee> employees = new LinkedList<Employee>();
-        employees = dbHandler.getEmployees("view_for_Zablag","snils",param);
+        employees = dbHandler.getEmployees("view_for_ocenka","snils",param);
 //        Collections.sort(employees);
         return employees;
     }

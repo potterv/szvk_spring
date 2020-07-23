@@ -51,6 +51,9 @@ public class Employee implements Comparable<Employee>{
     public boolean getResidenceCrimea(){
         return this.residenceCrimea;
     }
+    public StringBuffer getCommentary(){
+        return this.commentary;
+    }
 
     public StringBuffer getCountry() {
         return this.country;
@@ -93,6 +96,13 @@ public class Employee implements Comparable<Employee>{
     public void setResidenceCrimea(StringBuffer valResidenceCrimea ) {
         this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
     }
+    public StringBuffer getDateLoadFileXml(){
+        return  this.dateLoadFileXml;
+    }
+
+    public StringBuffer getDateLoadFileFromFfmsXls(){
+        return this.dateLoadFileFromFfmsXls;
+    }
 
     private Employee(Builder builder) {
         this.uuidPachka = builder.uuidPachka;
@@ -109,6 +119,9 @@ public class Employee implements Comparable<Employee>{
         this.city = builder.city;
         this.namepolicyholdershort = builder.namepolicyholdershort;
         this.regnumber = builder.regnumber;
+        this.commentary = builder.commentary;
+        this.dateLoadFileXml = builder.dateLoadFileXml;
+        this.dateLoadFileFromFfmsXls = builder.dateLoadFileFromFfmsXls;
     }
 // Реализация метода сравнения интерфейса Comparable для сортировки списка по полю surname, в алфавитном порядке
     @Override
@@ -117,6 +130,8 @@ public class Employee implements Comparable<Employee>{
     }
 
     public static  class Builder{
+
+
 
         //Конструктор с обязательными параметрами
         public Builder(StringBuffer snils){
@@ -205,7 +220,9 @@ public class Employee implements Comparable<Employee>{
                                         StringBuffer valRegion,
                                         StringBuffer valCity,
                                         StringBuffer valResidenceCrimea,
-                                        StringBuffer commentary){
+                                        StringBuffer commentary,
+                                        StringBuffer dateLoadFileXml,
+                                        StringBuffer dateLoadFileFromFfmsXls){
 //
 
             this.uuidPachka=valUuidPachka;
@@ -220,6 +237,9 @@ public class Employee implements Comparable<Employee>{
             this.city = valCity;
             this.residenceCrimea = Boolean.parseBoolean(new StringBuffer(valResidenceCrimea).toString());
             this.commentary= commentary;
+            this.dateLoadFileXml =dateLoadFileXml;
+            this.dateLoadFileFromFfmsXls=dateLoadFileFromFfmsXls;
+
             return this;
         }
 
@@ -260,6 +280,9 @@ public class Employee implements Comparable<Employee>{
         private StringBuffer  namepolicyholdershort;
         private StringBuffer regnumber;
         private StringBuffer commentary;
+        private StringBuffer dateLoadFileXml;
+        private StringBuffer dateLoadFileFromFfmsXls;
+
     }
 
 
@@ -282,5 +305,6 @@ public class Employee implements Comparable<Employee>{
     private StringBuffer  namepolicyholdershort;
     private StringBuffer regnumber;
     private StringBuffer commentary;
-
+    private StringBuffer dateLoadFileXml;
+    private StringBuffer dateLoadFileFromFfmsXls;
 }

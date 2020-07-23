@@ -65,7 +65,7 @@ public class ProcessingController {
         }
 
         log.info("Окончание обработки");
-        return "redirect:/download";
+        return "redirect:/";
     }
 
     private static final String DIRECTORY = "d:\\IdeaProject\\szvk_spring\\mail\\requests\\";
@@ -78,7 +78,7 @@ public class ProcessingController {
     @RequestMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile1(
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
-        this.dbHandler.getConnection();
+//        this.dbHandler.getConnection();
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
         this.view=this.wraperM.setView(this.wraperM.getModel().getEmployeeList(this.dbHandler),this.wraperM.getModel().getXls());
         this.nameFile=this.view.getNameFileXls();
@@ -144,9 +144,9 @@ public class ProcessingController {
     }
 
 
-    @GetMapping("/inputsnils")
+    @GetMapping("/infosnils")
     public String infosnils() {
-        return "inputsnils";
+        return "infosnils";
     }
 
     @PostMapping("/infosnils")
@@ -171,14 +171,51 @@ public class ProcessingController {
             model.addAttribute("surname", this.employees.get(0).getSurname());
             model.addAttribute("name", this.employees.get(0).getName());
             model.addAttribute("Patronymic", this.employees.get(0).getPatronymic());
-            model.addAttribute("Birthday", this.employees.get(0).getBirthday());
+            if ( this.employees.get(0).getBirthday().toString().equals("1582-02-24")){
+                model.addAttribute("Birthday", "По данному СНИЛС запрос не направлялся");
+            }else{
+                model.addAttribute("Birthday", this.employees.get(0).getBirthday());
+            }
+
+
             model.addAttribute("Country", this.employees.get(0).getCountry());
             model.addAttribute("Area", this.employees.get(0).getArea());
             model.addAttribute("Region", this.employees.get(0).getRegion());
             model.addAttribute("City", this.employees.get(0).getCity());
-            model.addAttribute("ResidenceCrimea", this.employees.get(0).getResidenceCrimea());
-//            model.addAttribute("Country", employees.get(0));
+
+            if (this.employees.get(0).getUuidRecord().toString().equals("-") && !this.employees.get(0).getResidenceCrimea()){
+
+                model.addAttribute("ResidenceCrimea", "По данному СНИЛС запрос не направлялся");
+
+            }else{
+                if (this.employees.get(0).getResidenceCrimea()){
+
+                    model.addAttribute("ResidenceCrimea", "да");
+                }else {
+                    model.addAttribute("ResidenceCrimea", "нет");
+                }
             }
+
+
+            model.addAttribute("Commentary", this.employees.get(0).getCommentary());
+
+            if (this.employees.get(0).getDateLoadFileXml().toString().equals("-")){
+                model.addAttribute("dateLoadFileXml","Запрос в ФМС еще не направлялся");
+            }else {
+                model.addAttribute("dateLoadFileXml",String.join("","Статус на: ",this.employees.get(0).getDateLoadFileXml().toString()," сфрмирован запрос для отправки в ФМС"));
+            }
+
+            if (this.employees.get(0).getDateLoadFileFromFfmsXls().toString().equals("-")){
+                model.addAttribute("dateLoadFileFromFfmsXls","Ответ от ФМС еще не получен");
+            }else {
+                model.addAttribute("dateLoadFileFromFfmsXls",String.join("","Статус на: ",this.employees.get(0).getDateLoadFileFromFfmsXls().toString()," получен ответ от ФМС"));
+            }
+
+
+
+            }
+
+
         catch (IndexOutOfBoundsException e ){
               model.addAttribute("errorMmasage", String.join("","Снилс ",snils," не найден в таблице ответов от ФМС"));
             }
