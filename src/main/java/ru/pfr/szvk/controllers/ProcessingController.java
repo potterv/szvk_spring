@@ -172,7 +172,7 @@ public class ProcessingController {
             model.addAttribute("name", this.employees.get(0).getName());
             model.addAttribute("Patronymic", this.employees.get(0).getPatronymic());
             if ( this.employees.get(0).getBirthday().toString().equals("1582-02-24")){
-                model.addAttribute("Birthday", "По данному СНИЛС запрос не направлялся");
+                model.addAttribute("Birthday", "");
             }else{
                 model.addAttribute("Birthday", this.employees.get(0).getBirthday());
             }
@@ -183,9 +183,9 @@ public class ProcessingController {
             model.addAttribute("Region", this.employees.get(0).getRegion());
             model.addAttribute("City", this.employees.get(0).getCity());
 
-            if (this.employees.get(0).getUuidRecord().toString().equals("-") && !this.employees.get(0).getResidenceCrimea()){
+            if (this.employees.get(0).getDateLoadFileFromFfmsXls().toString().equals("-")){
 
-                model.addAttribute("ResidenceCrimea", "По данному СНИЛС запрос не направлялся");
+                model.addAttribute("ResidenceCrimea", "");
 
             }else{
                 if (this.employees.get(0).getResidenceCrimea()){
