@@ -289,24 +289,10 @@ public class DbHandler {
                    birthday = "1582-02-24";
                }
 
-               rescrimea = resultSet.getString(nameColls[11].toString());
-               if (rescrimea == null) {
-                   rescrimea = "-";
-               }
-               comentary = resultSet.getString(nameColls[12].toString());
-               if (comentary == null) {
-                   comentary = "-";
-               }
 
 
-               dateLoadFileXml= resultSet.getString(nameColls[13].toString());
-               if (dateLoadFileXml == null) {
-                   dateLoadFileXml = "-";
-               }
-               dateLoadFileFromFfmsXls= resultSet.getString(nameColls[14].toString());
-               if (dateLoadFileFromFfmsXls == null) {
-                   dateLoadFileFromFfmsXls = "-";
-               }
+
+
 
 
                 country = resultSet.getString(nameColls[7].toString());
@@ -329,6 +315,23 @@ public class DbHandler {
 //
                if (nameTable.equals("view_for_ocenka")){
 
+                   rescrimea = resultSet.getString(nameColls[11].toString());
+                   if (rescrimea == null) {
+                       rescrimea = "-";
+                   }
+                   comentary = resultSet.getString(nameColls[12].toString());
+                   if (comentary == null) {
+                       comentary = "-";
+                   }
+
+                   dateLoadFileXml= resultSet.getString(nameColls[13].toString());
+                   if (dateLoadFileXml == null) {
+                       dateLoadFileXml = "-";
+                   }
+                   dateLoadFileFromFfmsXls= resultSet.getString(nameColls[14].toString());
+                   if (dateLoadFileFromFfmsXls == null) {
+                       dateLoadFileFromFfmsXls = "-";
+                   }
                    employeeList.add(new Employee.Builder(new StringBuffer(resultSet.getString("snils"))).getPolicyholder(
 
                            new StringBuffer(uuid_p),
