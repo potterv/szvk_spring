@@ -66,9 +66,10 @@ public class DbHandler {
     private DbHandler() throws SQLException {
         PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
          this.jdbcClassName="com.ibm.db2.jcc.DB2Driver";
-         this.url="jdbc:db2://10.92.0.71:50000/szvk";
+//         this.url="jdbc:db2://10.92.0.71:50000/szvk";
+         this.url="jdbc:db2://localhost:50000/szvk";
          this.user="db2admin";
-         this.password="dB2@dm1n";
+         this.password="";
 
 
 
