@@ -458,9 +458,9 @@ public class DbHandler {
     }
 
     private String jdbcClassName="com.ibm.db2.jcc.DB2Driver";
-    private String url="jdbc:db2://10.92.0.71:50000/szvk";
-    private String user="db2admin";
-    private String password="dB2@dm1n";
+    private String url="jdbc:db2://10.92.0.0:50000/szvk";
+    private String user="";
+    private String password="";
     private static final Logger log = Logger.getLogger(DbHandler.class);
 
 
